@@ -17,7 +17,7 @@
         <label for="content" class="form-label">내용:</label>
         <textarea id="content" name="content" class="form-control" placeholder="내용" th:text="${post.content}"></textarea>
     </div>
-    <input type="hidden" name="id" th:value="${post.id}"> <!-- 게시글의 ID를 hidden input으로 추가 -->
+    <input type="hidden" name="id" th:value="${post.id}">
     <button type="submit" class="btn btn-primary">수정 완료</button>
 </form>
 </body>
