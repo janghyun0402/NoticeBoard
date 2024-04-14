@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시판</title>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
+</head>
+<body class="container">
+<h1 class="mt-5">게시판</h1>
+
+<div class="mt-5">
+    <a class="btn btn-primary" href="/posts">게시글 작성</a>
+</div>
+
+<div class="mt-5">
+    <h2>게시글 목록</h2>
+    <ul class="list-group">
+        <li th:each="post : ${postList}" class="list-group-item">
+            <h3>
+                <a th:href="@{'/posts/' + ${post.id}}" th:text="${post.title}" class="text-decoration-none"></a>
+            </h3>
+            <form th:action="@{'/posts/' + ${post.id} + '/delete'}" method="post" class="d-inline">
+                <input type="hidden" name="_method" value="delete">
+                <button type="submit" class="btn btn-danger">글 삭제</button>
+            </form>
+        </li>
+    </ul>
+</div>
+</body>
+</html>
