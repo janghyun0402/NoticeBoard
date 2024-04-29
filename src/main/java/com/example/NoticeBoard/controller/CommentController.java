@@ -6,11 +6,13 @@ import com.example.NoticeBoard.repository.CommentRepository;
 import com.example.NoticeBoard.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.NoSuchElementException;
 
 @Controller
+@Transactional
 @RequiredArgsConstructor
 public class CommentController {
 
@@ -21,8 +23,7 @@ public class CommentController {
     public String postComment(@PathVariable Long postId,
                               @RequestParam String content) {
 
-        Post post = postRepository.findById(postId)
-                .orElseThrow(() -> new NoSuchElementException());
+        Post post = postRepository.findById(postId);
         Comment comment = Comment.of(content, post);
         commentRepository.save(comment);
 
