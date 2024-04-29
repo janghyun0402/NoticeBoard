@@ -7,6 +7,7 @@ import com.example.NoticeBoard.repository.CommentRepository;
 import com.example.NoticeBoard.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,9 +15,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 
 @Controller
+@Transactional
 @RequiredArgsConstructor
 public class PostController {
 
@@ -51,8 +52,7 @@ public class PostController {
 
     @GetMapping("/posts/{postId}")      //상세 페이지
     public String getPostDetail(@PathVariable Long postId, Model model){
-        Post post = postRepository.findById(postId)
-                .orElseThrow(() -> new NoSuchElementException());
+        Post post = postRepository.findById(postId);
 
         List<Comment> comments = commentRepository.findCommentsByPost(post);
         model.addAttribute("post", post);
@@ -70,8 +70,7 @@ public class PostController {
 
     @GetMapping("/posts/{postId}/edit")       //수정 페이지
     public String getEditPost(@PathVariable Long postId, Model model) {
-        Post post = postRepository.findById(postId)
-                .orElseThrow(() -> new NoSuchElementException());
+        Post post = postRepository.findById(postId);
 
         model.addAttribute("post", post);
         return "post_edit";
@@ -83,7 +82,7 @@ public class PostController {
                            @RequestParam String title,
                            @RequestParam String content, Model model) {
         Post editedPost = Post.of(id, title, content);
-        postRepository.save(editedPost);
+        postRepository.modify(editedPost);
 
         return "redirect:/posts/" + postId;
     }
