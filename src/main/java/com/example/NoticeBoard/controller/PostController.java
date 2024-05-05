@@ -26,9 +26,9 @@ public class PostController {
 
     @GetMapping("/")        //게시글 제목 리스트 출력
     public String getPostList(Model model){
-        List<Post> postList = postRepository.findAll();
+        List<Post> posts = postRepository.findAll();
 
-        List<PostListDto> postListDtos = postList.stream()
+        List<PostListDto> postListDtos = posts.stream()
                 .map(post -> PostListDto.from(post))
                 .toList();
 
