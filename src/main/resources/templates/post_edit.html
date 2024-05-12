@@ -17,6 +17,9 @@
         <label for="content" class="form-label">내용:</label>
         <textarea id="content" name="content" class="form-control" placeholder="내용" th:text="${post.content}"></textarea>
     </div>
+    <!-- Hidden input 필드를 사용하여 likes와 views 값을 서버로 전송 -->
+    <input type="hidden" name="likes" th:value="${post.likes}">
+    <input type="hidden" name="views" th:value="${post.views}">
     <input type="hidden" name="id" th:value="${post.id}">
     <button type="submit" class="btn btn-primary">수정 완료</button>
 </form>
