@@ -35,7 +35,4 @@ public class PostRepository {
         em.merge(post);
     }
 
-
-
-
 }
