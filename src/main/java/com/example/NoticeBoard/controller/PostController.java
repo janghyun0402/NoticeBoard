@@ -5,6 +5,8 @@ import com.example.NoticeBoard.domain.Post;
 import com.example.NoticeBoard.domain.PostListDto;
 import com.example.NoticeBoard.repository.CommentRepository;
 import com.example.NoticeBoard.repository.PostRepository;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -24,11 +26,13 @@ import java.util.List;
 @Transactional
 @RequiredArgsConstructor
 @Slf4j
+@Tag(name = "Post API", description = "Post API 설명")
 public class PostController {
 
     private final PostRepository postRepository;
     private final CommentRepository commentRepository;
 
+    @Operation(summary = "메인 페이지 html 리턴", description = "index.html 리턴")
     @GetMapping("/")        //게시글 리스트 출력
     public String getPosts(Model model) {
         List<Post> posts = postRepository.findAll();
