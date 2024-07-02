@@ -3,9 +3,9 @@ spring:
     name: NoticeBoard
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/notice_board?characterEncoding=UTF-8&serverTimezone=UTC
+    url: jdbc:mysql://db:3306/NoticeBoard?useSSL=false
     username: root
-    password: P@ssw0rd
+    password: testpassword
   jpa:
     show-sql: true
     hibernate:
